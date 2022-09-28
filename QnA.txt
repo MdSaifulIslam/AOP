@@ -1,0 +1,10 @@
+1. Can we name class name like tennisCoach/ tennisCoachText for default Componant annotataion?
+	-yes
+	
+2. Can we auto wired any method
+	- yes
+	
+3. Can autowired Initialization be after calling
+	- yes
+	
+4. 
