@@ -7,11 +7,11 @@ import org.springframework.stereotype.Component;
 
 @Aspect
 @Component
-@Order(1)
-public class MyLoggignAspect {
-
+@Order(2)
+public class MyLog2DriveAspect {
+	
 	@Before("com.springdemo.aopdemo.aspect.AspectExpression.pointCutTest()")
-	public void beforeAddAccoutAdvice() {
+	public void beforeAddDriveAdvice() {
 		System.out.println(getClass() + " This is the pre-work to done");
 	}
 }

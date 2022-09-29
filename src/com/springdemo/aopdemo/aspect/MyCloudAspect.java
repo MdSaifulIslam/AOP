@@ -7,11 +7,11 @@ import org.springframework.stereotype.Component;
 
 @Aspect
 @Component
-@Order(1)
-public class MyLoggignAspect {
+@Order(3)
+public class MyCloudAspect {
 
 	@Before("com.springdemo.aopdemo.aspect.AspectExpression.pointCutTest()")
-	public void beforeAddAccoutAdvice() {
+	public void beforeAddCloudAdvice() {
 		System.out.println(getClass() + " This is the pre-work to done");
 	}
 }
