@@ -8,8 +8,8 @@ import org.springframework.stereotype.Component;
 @Component
 public class MyLoggignAspect {
 
-	@Before("execution(public void addAccount())")
+	@Before("execution(* add*())")
 	public void beforeAddAccoutAdvice() {
-		System.out.println("This is the pre-work to done");
+		System.out.println(getClass() + " This is the pre-work to done");
 	}
 }
