@@ -12,6 +12,6 @@ public class MyCloudAspect {
 
 	@Before("com.springdemo.aopdemo.aspect.AspectExpression.pointCutTest()")
 	public void beforeAddCloudAdvice() {
-		System.out.println(getClass() + " This is the pre-work to done");
+		System.out.println(" This is the pre-work to done --cloud");
 	}
 }
