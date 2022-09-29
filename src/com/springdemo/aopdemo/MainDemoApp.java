@@ -14,15 +14,16 @@ public class MainDemoApp {
 		
 		AccountDAO accountDAO = 
 				context.getBean("accountDAO", AccountDAO.class);
-		
-		accountDAO.addAccount();
-		
-		System.out.println("\nTry Membership DAO\n");
+		Account acc = new Account();
+////		accountDAO.addAccount(acc);
+//		accountDAO.doSomething();
+//		
+		accountDAO.setEmail("dsas");
 		
 		MembershipDAO membershipDAO = 
 				context.getBean("membershipDAO", MembershipDAO.class);
 		
-		membershipDAO.addAccount4Membership();
+//		membershipDAO.addAccount4Membership();
 
 	}
 
