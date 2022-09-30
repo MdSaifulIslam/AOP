@@ -3,6 +3,7 @@ package com.springdemo.aopdemo.aspect;
 import java.util.List;
 
 import org.aspectj.lang.JoinPoint;
+import org.aspectj.lang.annotation.After;
 import org.aspectj.lang.annotation.AfterReturning;
 import org.aspectj.lang.annotation.AfterThrowing;
 import org.aspectj.lang.annotation.Aspect;
@@ -18,6 +19,16 @@ import com.springdemo.aopdemo.Account;
 @Order(1)
 public class MyLoggignAspect {
 	
+	@After(
+			"execution(* com.springdemo.aopdemo.dao.AccountDAO.findAccount(..))"
+			)
+	public void afterFinallyFindAccountAdvice(
+			JoinPoint theJoinPoint
+			) {
+		
+		System.out.println("Always print after the method");	
+		
+	}
 	@AfterReturning(
 			pointcut = "execution(* com.springdemo.aopdemo.dao.AccountDAO.findAccount(..))",
 			returning = "returnedData"

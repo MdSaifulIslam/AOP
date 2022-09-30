@@ -19,7 +19,7 @@ public class MainDemoApp {
 
 		try {
 
-			boolean tripWire = true;
+			boolean tripWire = false;
 
 			theAccounts = accountDAO.findAccount(tripWire);
 		} catch (Exception e) {
