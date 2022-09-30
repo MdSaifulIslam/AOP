@@ -1,6 +1,10 @@
 package com.springdemo.aopdemo.aspect;
 
+import org.aspectj.lang.annotation.AfterReturning;
 import org.aspectj.lang.annotation.Aspect;
+
+import java.util.List;
+
 import org.aspectj.lang.*;
 import org.aspectj.lang.annotation.Before;
 import org.aspectj.lang.reflect.MethodSignature;
@@ -13,6 +17,18 @@ import com.springdemo.aopdemo.Account;
 @Component
 @Order(1)
 public class MyLoggignAspect {
+	
+	@AfterReturning(
+			pointcut = "execution(* com.springdemo.aopdemo.dao.AccountDAO.findAccount(..))",
+			returning = "returnedData"
+			)
+	public void afterReturningFindAccountAdvice(
+			JoinPoint theJoinPoint, List<Account> returnedData
+			) {
+		
+		System.out.println("After returning-----" + returnedData);
+		
+	}
 
 	@Before("com.springdemo.aopdemo.aspect.AspectExpression.pointCutTest()")
 	public void beforeAddAccoutAdvice(JoinPoint theJoinPoint) {

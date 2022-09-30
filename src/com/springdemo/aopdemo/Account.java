@@ -4,6 +4,14 @@ public class Account {
 	
 	private String name;
 	private String email;
+	
+	public Account() {
+	}
+	public Account(String name, String email) {
+		this.name = name;
+		this.email = email;
+	}
+	
 	public String getName() {
 		return name;
 	}
@@ -15,6 +23,10 @@ public class Account {
 	}
 	public void setEmail(String email) {
 		this.email = email;
+	}
+	@Override
+	public String toString() {
+		return "Account [name=" + name + ", email=" + email + "]";
 	}
 
 }

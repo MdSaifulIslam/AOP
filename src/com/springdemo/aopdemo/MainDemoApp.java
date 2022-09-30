@@ -1,9 +1,10 @@
 package com.springdemo.aopdemo;
 
+import java.util.List;
+
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 
 import com.springdemo.aopdemo.dao.AccountDAO;
-import com.springdemo.aopdemo.dao.MembershipDAO;
 
 public class MainDemoApp {
 
@@ -15,20 +16,26 @@ public class MainDemoApp {
 		AccountDAO accountDAO = 
 				context.getBean("accountDAO", AccountDAO.class);
 		
-		Account acc = new Account();
-		acc.setEmail("fdshkfg");
-		acc.setName("dfsfgdfggfgfgfgfg");
+		List<Account> theAccounts = accountDAO.findAccount();
 		
-		accountDAO.addAccount(acc);
+		System.out.println("\n" + theAccounts + "\n");
 		
-//		accountDAO.doSomething();
+		context.close();
+		
+//		Account acc = new Account();
+//		acc.setEmail("fdshkfg");
+//		acc.setName("dfsfgdfggfgfgfgfg");
 //		
-		accountDAO.setEmail("dsas");
-		
-		MembershipDAO membershipDAO = 
-				context.getBean("membershipDAO", MembershipDAO.class); 
-		
-		membershipDAO.addAccount4Membership();
+//		accountDAO.addAccount(acc);
+//		
+////		accountDAO.doSomething();
+////		
+//		accountDAO.setEmail("dsas");
+//		
+//		MembershipDAO membershipDAO = 
+//				context.getBean("membershipDAO", MembershipDAO.class); 
+//		
+//		membershipDAO.addAccount4Membership();
 
 	}
 
