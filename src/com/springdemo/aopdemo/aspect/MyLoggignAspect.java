@@ -7,6 +7,8 @@ import org.aspectj.lang.reflect.MethodSignature;
 import org.springframework.core.annotation.Order;
 import org.springframework.stereotype.Component;
 
+import com.springdemo.aopdemo.Account;
+
 @Aspect
 @Component
 @Order(1)
@@ -24,6 +26,12 @@ public class MyLoggignAspect {
 		
 		for (Object object : args) {
 			System.out.println("Args - " + object);
+			
+			if(object instanceof Account) {
+				Account tempAccount = (Account) object;
+				System.out.println("Account args - " + tempAccount.getEmail());
+				System.out.println("Account args - " + tempAccount.getName());
+			}
 		}
 	}
 }
