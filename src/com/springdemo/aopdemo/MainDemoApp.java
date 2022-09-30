@@ -17,8 +17,10 @@ public class MainDemoApp {
 		context = new AnnotationConfigApplicationContext(DemoConfig.class);
 
 		TrafficService trafficService = context.getBean("trafficService", TrafficService.class);
+		
+		boolean tripWire = true;
 
-		logger.info(trafficService.getService());
+		logger.info(trafficService.getService(tripWire).toString());
 
 		// after after throwing
 		// List<Account> theAccounts = null;

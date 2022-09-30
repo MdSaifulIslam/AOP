@@ -19,5 +19,13 @@ public class TrafficService {
 		return "expect more trafic";
 		
 	}
+	public String getService(boolean tripWire) {
+		
+		if(tripWire) {
+			throw new RuntimeException("cought in error");
+		}
+		
+		return getService();
+	}
 
 }

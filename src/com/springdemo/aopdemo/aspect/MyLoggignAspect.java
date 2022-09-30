@@ -3,6 +3,8 @@ package com.springdemo.aopdemo.aspect;
 import java.util.List;
 import java.util.logging.Logger;
 
+import javax.naming.spi.DirStateFactory.Result;
+
 import org.aspectj.lang.JoinPoint;
 import org.aspectj.lang.ProceedingJoinPoint;
 import org.aspectj.lang.annotation.After;
@@ -33,7 +35,15 @@ public class MyLoggignAspect {
 		
 		long begain = System.currentTimeMillis();
 		
-		proceedingJoinPoint.proceed();
+		Object result;
+		
+		try {
+			result =  proceedingJoinPoint.proceed();
+		} catch (Exception e) {
+			logger.warning( "---:::---" + e.getMessage());
+			
+		    throw e;
+		}
 		
 		long end = System.currentTimeMillis();
 		
