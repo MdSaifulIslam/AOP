@@ -13,8 +13,15 @@ public class AccountDAO {
 	private String email;
 	private String name;
 	
-	public List<Account> findAccount(){
+	public List<Account> findAccount(boolean tripWire){
+		
+		
+		
 		List<Account> accounts = new ArrayList<Account>();
+		
+		if(tripWire) {
+			throw new RuntimeException("test error");
+		}
 		
 		accounts.add(new Account("saiful", "saiful@g.com"));
 		accounts.add(new Account("Jamal", "jamal@g.com"));

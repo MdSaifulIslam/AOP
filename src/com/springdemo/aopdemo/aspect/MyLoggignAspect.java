@@ -1,11 +1,11 @@
 package com.springdemo.aopdemo.aspect;
 
-import org.aspectj.lang.annotation.AfterReturning;
-import org.aspectj.lang.annotation.Aspect;
-
 import java.util.List;
 
-import org.aspectj.lang.*;
+import org.aspectj.lang.JoinPoint;
+import org.aspectj.lang.annotation.AfterReturning;
+import org.aspectj.lang.annotation.AfterThrowing;
+import org.aspectj.lang.annotation.Aspect;
 import org.aspectj.lang.annotation.Before;
 import org.aspectj.lang.reflect.MethodSignature;
 import org.springframework.core.annotation.Order;
@@ -26,7 +26,29 @@ public class MyLoggignAspect {
 			JoinPoint theJoinPoint, List<Account> returnedData
 			) {
 		
-		System.out.println("After returning-----" + returnedData);
+		convertAccountNameToUpperCase(returnedData);
+		
+		System.out.println("in aspect -returened -modified: " + returnedData);
+		
+	}
+	@AfterThrowing(
+			pointcut = "execution(* com.springdemo.aopdemo.dao.AccountDAO.findAccount(..))",
+			throwing = "theExp"
+			)
+	public void afterThrowingFindAccountAdvice(
+			JoinPoint theJoinPoint, Throwable theExp
+			) {
+		
+		
+		System.out.println("in aspect -returened -modified: " + theExp);
+		
+	}
+
+	private void convertAccountNameToUpperCase(List<Account> returnedData) {
+		for (Account account : returnedData) {
+			String upperCaseName = account.getName().toUpperCase();
+			account.setName(upperCaseName);
+		}
 		
 	}
 
