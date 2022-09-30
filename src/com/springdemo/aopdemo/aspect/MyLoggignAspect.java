@@ -1,11 +1,14 @@
 package com.springdemo.aopdemo.aspect;
 
 import java.util.List;
+import java.util.logging.Logger;
 
 import org.aspectj.lang.JoinPoint;
+import org.aspectj.lang.ProceedingJoinPoint;
 import org.aspectj.lang.annotation.After;
 import org.aspectj.lang.annotation.AfterReturning;
 import org.aspectj.lang.annotation.AfterThrowing;
+import org.aspectj.lang.annotation.Around;
 import org.aspectj.lang.annotation.Aspect;
 import org.aspectj.lang.annotation.Before;
 import org.aspectj.lang.reflect.MethodSignature;
@@ -19,6 +22,26 @@ import com.springdemo.aopdemo.Account;
 @Order(1)
 public class MyLoggignAspect {
 	
+	Logger logger = Logger.getLogger(getClass().getName());
+	
+	@Around(
+			"execution(* com.springdemo.aopdemo.service.TrafficService.getService(..))"
+			)
+	public Object aroundgetServiceAdvice(
+			ProceedingJoinPoint proceedingJoinPoint
+			) throws Throwable {
+		
+		long begain = System.currentTimeMillis();
+		
+		proceedingJoinPoint.proceed();
+		
+		long end = System.currentTimeMillis();
+		
+		logger.info("duretion: - " + (end-begain) + " miliseconds");
+		
+		return null;
+	}
+	
 	@After(
 			"execution(* com.springdemo.aopdemo.dao.AccountDAO.findAccount(..))"
 			)
@@ -26,7 +49,7 @@ public class MyLoggignAspect {
 			JoinPoint theJoinPoint
 			) {
 		
-		System.out.println("Always print after the method");	
+		logger.info("Always print after the method");	
 		
 	}
 	@AfterReturning(
@@ -39,7 +62,7 @@ public class MyLoggignAspect {
 		
 		convertAccountNameToUpperCase(returnedData);
 		
-		System.out.println("in aspect -returened -modified: " + returnedData);
+		logger.info("in aspect -returened -modified: " + returnedData);
 		
 	}
 	@AfterThrowing(
@@ -51,7 +74,7 @@ public class MyLoggignAspect {
 			) {
 		
 		
-		System.out.println("in aspect -returened -modified: " + theExp);
+		logger.info("in aspect -returened -modified: " + theExp);
 		
 	}
 
@@ -65,21 +88,21 @@ public class MyLoggignAspect {
 
 	@Before("com.springdemo.aopdemo.aspect.AspectExpression.pointCutTest()")
 	public void beforeAddAccoutAdvice(JoinPoint theJoinPoint) {
-		System.out.println(" This is the pre-work to done - Logging");
+		logger.info(" This is the pre-work to done - Logging");
 		
 		MethodSignature sign = (MethodSignature)theJoinPoint.getSignature();
 		
 		Object[] args = theJoinPoint.getArgs();
 		
-		System.out.println("Signature of - " + sign);
+		logger.info("Signature of - " + sign);
 		
 		for (Object object : args) {
-			System.out.println("Args - " + object);
+			logger.info("Args - " + object);
 			
 			if(object instanceof Account) {
 				Account tempAccount = (Account) object;
-				System.out.println("Account args - " + tempAccount.getEmail());
-				System.out.println("Account args - " + tempAccount.getName());
+				logger.info("Account args - " + tempAccount.getEmail());
+				logger.info("Account args - " + tempAccount.getName());
 			}
 		}
 	}

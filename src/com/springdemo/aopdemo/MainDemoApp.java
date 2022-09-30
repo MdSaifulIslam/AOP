@@ -1,32 +1,38 @@
 package com.springdemo.aopdemo;
 
-import java.util.List;
+import java.util.logging.Logger;
 
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 
-import com.springdemo.aopdemo.dao.AccountDAO;
+import com.springdemo.aopdemo.service.TrafficService;
 
 public class MainDemoApp {
 
 	private static AnnotationConfigApplicationContext context;
+	
+	private static Logger logger = 
+			Logger.getLogger(MainDemoApp.class.getName());
 
 	public static void main(String[] args) {
 		context = new AnnotationConfigApplicationContext(DemoConfig.class);
 
-		AccountDAO accountDAO = context.getBean("accountDAO", AccountDAO.class);
+		TrafficService trafficService = context.getBean("trafficService", TrafficService.class);
 
-		List<Account> theAccounts = null;
+		logger.info(trafficService.getService());
 
-		try {
-
-			boolean tripWire = false;
-
-			theAccounts = accountDAO.findAccount(tripWire);
-		} catch (Exception e) {
-			System.out.println("error in main - " + e);
-		}
-
-		System.out.println("\n-in main-  " + theAccounts + "\n");
+		// after after throwing
+		// List<Account> theAccounts = null;
+		//
+		// try {
+		//
+		// boolean tripWire = false;
+		//
+		// theAccounts = accountDAO.findAccount(tripWire);
+		// } catch (Exception e) {
+		// System.out.println("error in main - " + e);
+		// }
+		//
+		// System.out.println("\n-in main- " + theAccounts + "\n");
 
 		context.close();
 
